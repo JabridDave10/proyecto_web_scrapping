@@ -71,17 +71,4 @@ async def descargar_excel():
 @app.get("/health")
 async def health_check():
     """Health check endpoint for Railway deployment"""
-    try:
-        # Test if we can make a basic request to verify the app is working
-        return {
-            "status": "healthy", 
-            "message": "API is running",
-            "timestamp": pd.Timestamp.now().isoformat(),
-            "version": "1.0.0"
-        }
-    except Exception as e:
-        return {
-            "status": "unhealthy",
-            "message": f"Error: {str(e)}",
-            "timestamp": pd.Timestamp.now().isoformat()
-        }
+    return {"status": "healthy", "message": "API is running"}
