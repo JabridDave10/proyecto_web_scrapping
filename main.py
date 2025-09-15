@@ -5,7 +5,13 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from io import BytesIO
 
-app = FastAPI(title="Product Crawler API", version="1.0.0")
+app = FastAPI(
+    title="API Crawler de Productos",
+    description="API para extraer información de productos de tiendas online, incluyendo nombres, precios, URLs e imágenes",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc"
+)
 
 @app.get("/")
 async def root():
