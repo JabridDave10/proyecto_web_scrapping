@@ -62,3 +62,8 @@ async def descargar_excel():
         'Content-Disposition': 'attachment; filename="resultados.xlsx"'
     }
     return StreamingResponse(output, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', headers=headers)
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for Railway deployment"""
+    return {"status": "healthy", "message": "API is running"}
