@@ -5,7 +5,12 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from io import BytesIO
 
-app = FastAPI()
+app = FastAPI(title="Product Crawler API", version="1.0.0")
+
+@app.get("/")
+async def root():
+    """Root endpoint"""
+    return {"message": "Product Crawler API is running", "status": "healthy"}
 
 URL = "https://ilot.co/collections/nueva-coleccion"
 HEADERS = {
@@ -66,4 +71,17 @@ async def descargar_excel():
 @app.get("/health")
 async def health_check():
     """Health check endpoint for Railway deployment"""
-    return {"status": "healthy", "message": "API is running"}
+    try:
+        # Test if we can make a basic request to verify the app is working
+        return {
+            "status": "healthy", 
+            "message": "API is running",
+            "timestamp": pd.Timestamp.now().isoformat(),
+            "version": "1.0.0"
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy",
+            "message": f"Error: {str(e)}",
+            "timestamp": pd.Timestamp.now().isoformat()
+        }
